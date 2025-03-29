@@ -5,6 +5,7 @@ import 'package:impact_poc/src/models/data/facilities_items.dart';
 import 'package:impact_poc/src/models/data/fwr_items.dart';
 import 'package:impact_poc/src/models/data/more_info_items.dart';
 import 'package:impact_poc/src/models/menu_item.dart';
+import 'package:impact_poc/src/views/screens/calendar_screen.dart';
 
 import 'package:impact_poc/src/views/screens/home_screen.dart';
 import 'package:impact_poc/src/views/screens/list_view_screen.dart';
@@ -27,12 +28,21 @@ final appRouter = GoRouter(
   initialLocation: '/',
   debugLogDiagnostics: true,
   routes: [
-
     /// The main route of the app, which is the home screen.
     GoRoute(
       path: '/',
       name: AppRoutes.home.name,
       builder: (context, state) => const HomeScreen(),
+    ),
+
+    /// The Calendar route, which shows the list of calendar items.
+    GoRoute(
+      path: AppRoutes.calendar.path,
+      name: AppRoutes.calendar.name,
+      builder: (context, state) {
+        final fromDrawer = state.extra as bool? ?? false;
+        return CalendarScreen(showDrawer: fromDrawer);
+      },
     ),
 
     /// The Bin Info route, which shows the list of bin items.
@@ -96,7 +106,8 @@ final appRouter = GoRouter(
     ),
 
     /// The News and Alerts route, which shows the list of news and alerts items.
-    GoRoute(path: AppRoutes.newsAlerts.path,
+    GoRoute(
+      path: AppRoutes.newsAlerts.path,
       name: AppRoutes.newsAlerts.name,
       builder: (context, state) {
         final fromDrawer = state.extra as bool? ?? false;
