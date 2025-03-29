@@ -11,9 +11,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShadApp.router(
+    return ShadApp.materialRouter(
       title: 'Impact POC',
       routerConfig: appRouter,
+      materialThemeBuilder: (context, theme) {
+        return theme.copyWith(
+          appBarTheme: AppBarTheme(
+            backgroundColor: ShadTheme.of(context).colorScheme.primary,
+            foregroundColor: ShadTheme.of(context).colorScheme.primaryForeground,
+          ),
+        );
+      },
       theme: ShadThemeData(
         colorScheme: ShadBlueColorScheme.light(),
         brightness: Brightness.light,

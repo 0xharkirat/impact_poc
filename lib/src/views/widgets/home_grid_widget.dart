@@ -1,12 +1,11 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:impact_poc/src/models/data/menu_item_data.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class HomeGridWidget extends StatelessWidget {
-  const HomeGridWidget({
-    super.key,
-  });
+  const HomeGridWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,45 +20,55 @@ class HomeGridWidget extends StatelessWidget {
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisExtent: cardHeight
+        mainAxisExtent: cardHeight,
       ),
       itemBuilder: (context, index) {
         final item = menuItems[index];
-    
+
         return GestureDetector(
           onTap: () {
-            log('Tapped on ${item.title}');
+            log('Tapped on ${item.title}, route: ${item.route}');
             // Navigate or trigger action
+            item.route != null ? context.pushNamed(item.route!) : null;
           },
           child: ShadCard(
+            padding: const EdgeInsets.only(bottom: 4),
             height: cardHeight,
             child: Center(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+
                 children: [
                   // Circular avatar-style icon
-                  Container(
-                    width: iconContainerSize,
-                    height: iconContainerSize,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primary,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        item.icon,
-                        size: iconSize,
-                        color: Theme.of(context).colorScheme.onPrimary,
+                  Expanded(
+                    child: Container(
+                      width: iconContainerSize,
+                      height: iconContainerSize,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      child: Center(
+                        child: Icon(
+                          item.icon,
+                          size: iconSize,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
                       ),
                     ),
                   ),
-                  Spacer(),
+
                   // Title text
                   Text(
                     item.title,
-                    style: Theme.of(context).textTheme.labelLarge,
+                    style: TextStyle(
+                      fontSize: iconSize * 0.30,
+                      fontWeight: FontWeight.w500,
+
+                      color:
+                          ShadTheme.of(context).colorScheme.secondaryForeground,
+                    ),
+
                     textAlign: TextAlign.center,
                   ),
                 ],
