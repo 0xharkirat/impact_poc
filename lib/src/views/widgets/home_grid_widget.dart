@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:impact_poc/src/models/data/menu_item_data.dart';
+import 'package:impact_poc/src/models/data/main_menu_items.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class HomeGridWidget extends StatelessWidget {
@@ -16,14 +16,14 @@ class HomeGridWidget extends StatelessWidget {
 
     return GridView.builder(
       padding: const EdgeInsets.all(4),
-      itemCount: menuItems.length,
+      itemCount: mainMenuItems.length,
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisExtent: cardHeight,
       ),
       itemBuilder: (context, index) {
-        final item = menuItems[index];
+        final item = mainMenuItems[index];
 
         return GestureDetector(
           onTap: () {

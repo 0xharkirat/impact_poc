@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:impact_poc/src/views/widgets/drawer_widget.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-
 class BaseScaffold extends StatelessWidget {
   final String title;
   final Widget body;
@@ -13,7 +12,6 @@ class BaseScaffold extends StatelessWidget {
     required this.title,
     required this.body,
     this.showDrawer = false,
-
   });
 
   @override
@@ -26,7 +24,7 @@ class BaseScaffold extends StatelessWidget {
         title: Text(title),
         // shows drawer OR back automatically
       ),
-       drawer: showDrawer ? const DrawerWidget() : null,
+      drawer: showDrawer ? const DrawerWidget() : null,
       body: body,
     );
   }

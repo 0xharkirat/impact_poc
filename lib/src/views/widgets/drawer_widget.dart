@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:impact_poc/src/core/app_router.dart';
-import 'package:impact_poc/src/models/data/menu_item_data.dart';
+import 'package:impact_poc/src/models/data/main_menu_items.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -43,7 +43,7 @@ class DrawerWidget extends StatelessWidget {
               onTap: () => Navigator.pop(context),
             ),
             // Generate menu items with dividers
-            ...menuItems.map(
+            ...mainMenuItems.map(
               (item) => ListTile(
                 title: Text(item.title),
                 leading: _circleIcon(item.icon, primaryColor, iconColor),
@@ -60,7 +60,7 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 
-  Widget _circleIcon(IconData icon, Color bg, Color fg) {
+  Widget _circleIcon(IconData? icon, Color bg, Color fg) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
