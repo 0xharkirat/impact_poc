@@ -1,4 +1,3 @@
-
 import 'package:go_router/go_router.dart';
 import 'package:impact_poc/src/models/bin_item.dart';
 import 'package:impact_poc/src/models/data/bin_items.dart';
@@ -9,33 +8,40 @@ import 'package:impact_poc/src/models/menu_item.dart';
 
 import 'package:impact_poc/src/views/screens/home_screen.dart';
 import 'package:impact_poc/src/views/screens/list_view_screen.dart';
-
+import 'package:impact_poc/src/views/screens/news_alerts_screen.dart';
 
 enum AppRoutes {
   home,
+  calendar,
+  newsAlerts,
   binInfo,
   foodWasteRecycling,
   moreInfo,
   facilities,
   nearMe,
   aToZ,
+  settings,
 }
 
 final appRouter = GoRouter(
   initialLocation: '/',
   debugLogDiagnostics: true,
   routes: [
+
+    /// The main route of the app, which is the home screen.
     GoRoute(
       path: '/',
       name: AppRoutes.home.name,
       builder: (context, state) => const HomeScreen(),
     ),
+
+    /// The Bin Info route, which shows the list of bin items.
     GoRoute(
       path: AppRoutes.binInfo.path,
       name: AppRoutes.binInfo.name,
       builder: (context, state) {
         final fromDrawer = state.extra as bool? ?? false;
-        
+
         return ListViewScreen<BinItem>(
           title: "Bin Info",
           showDrawer: fromDrawer,
@@ -43,6 +49,8 @@ final appRouter = GoRouter(
         );
       },
     ),
+
+    /// The Food Waste Recycling route, which shows the list of food waste recycling items.
     GoRoute(
       path: AppRoutes.foodWasteRecycling.path,
       name: AppRoutes.foodWasteRecycling.name,
@@ -57,7 +65,7 @@ final appRouter = GoRouter(
       },
     ),
 
-    // create two routes for the moreInfo and facilities screens
+    /// The more info route, which shows the list of more info items.
     GoRoute(
       path: AppRoutes.moreInfo.path,
       name: AppRoutes.moreInfo.name,
@@ -72,6 +80,7 @@ final appRouter = GoRouter(
       },
     ),
 
+    /// The facilities route, which shows the list of facilities items.
     GoRoute(
       path: AppRoutes.facilities.path,
       name: AppRoutes.facilities.name,
@@ -83,6 +92,16 @@ final appRouter = GoRouter(
           showDrawer: fromDrawer,
           items: facilitiesMenuItems,
         );
+      },
+    ),
+
+    /// The News and Alerts route, which shows the list of news and alerts items.
+    GoRoute(path: AppRoutes.newsAlerts.path,
+      name: AppRoutes.newsAlerts.name,
+      builder: (context, state) {
+        final fromDrawer = state.extra as bool? ?? false;
+
+        return NewsAlertsScreen(showDrawer: fromDrawer);
       },
     ),
   ],
