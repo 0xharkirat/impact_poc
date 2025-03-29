@@ -5,5 +5,5 @@ class MenuItem {
   final IconData? icon;
   final String? route;
 
-  const MenuItem({required this.title, required this.icon, this.route});
+  const MenuItem({required this.title,  this.icon, this.route});
 }
