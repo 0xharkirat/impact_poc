@@ -1,15 +1,20 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:impact_poc/src/core/app_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 void main() {
-  runApp(
-    DevicePreview(
-      tools: [...DevicePreview.defaultTools],
+  final isMobile = defaultTargetPlatform == TargetPlatform.android ||
+      defaultTargetPlatform == TargetPlatform.iOS;
 
-      builder: (context) => MyApp(), // Wrap your app
-    ),
+  runApp(
+    kIsWeb || !isMobile
+        ? DevicePreview(
+            tools: [...DevicePreview.defaultTools],
+            builder: (context) => const MyApp(),
+          )
+        : const MyApp(),
   );
 }
 
@@ -19,9 +24,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadApp.materialRouter(
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
-
+      locale: DevicePreview.isEnabled(context)
+          ? DevicePreview.locale(context)
+          : null,
+      builder: DevicePreview.isEnabled(context)
+          ? DevicePreview.appBuilder
+          : null,
       title: 'Impact POC',
       routerConfig: appRouter,
       materialThemeBuilder: (context, theme) {

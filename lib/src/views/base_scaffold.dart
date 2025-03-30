@@ -22,6 +22,12 @@ class BaseScaffold extends StatelessWidget {
           color: ShadTheme.of(context).colorScheme.primaryForeground,
         ),
         title: Text(title),
+        actions: [
+          Image.asset(
+            'assets/brcc.png',
+            height: 40,
+          ),
+        ],
         // shows drawer OR back automatically
       ),
       drawer: showDrawer ? const DrawerWidget() : null,
