@@ -2,6 +2,8 @@
 
 This is a Flutter proof of concept (POC) project for one of the apps by Impact Apps. The POC demonstrates key Flutter development skills, including UI structuring, dynamic routing, reusable components, and data modeling.
 
+<img width="1552" alt="Screenshot 2025-03-31 at 10 31 52 am" src="https://github.com/user-attachments/assets/de6be673-6775-4fa4-a12d-ecc7cdb98f74" />
+
 ## 🗑️ About
 This POC replicates the Brisbane Bin Collection app. It includes:
 - Dynamic list-based screens
