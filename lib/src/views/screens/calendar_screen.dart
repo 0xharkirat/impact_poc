@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:impact_poc/src/views/base_scaffold.dart';
 import 'package:impact_poc/src/views/widgets/custom_bin_calendar.dart';
-import 'package:intl/intl.dart';
 
 
 class CalendarScreen extends StatefulWidget {
