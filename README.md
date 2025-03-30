@@ -31,8 +31,8 @@ lib/
 
 ## 🚀 Getting Started
 ```bash
-git clone https://github.com/yourusername/impact-poc.git
-cd impact-poc
+git clone https://github.com/0xharkirat/impact_poc.git
+cd impact_poc
 flutter pub get
 flutter run
 ```

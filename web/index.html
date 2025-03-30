@@ -1,38 +1,109 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+  <head>
+    <base href="$FLUTTER_BASE_HREF" />
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="Impact POC - Flutter Web App" />
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+    <title>Impact POC</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/png" href="favicon.png" />
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Impact POC" />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+    <!-- Splash Styling -->
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+      #splash-screen {
+        position: fixed;
+        background-color: white;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="impact_poc">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+      #splash-screen img {
+        width: 150px;
+        height: auto;
+        animation: fadein 1s ease-in-out;
+      }
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+      @keyframes fadein {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
 
-  <title>Impact POC</title>
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <script src="flutter_bootstrap.js" async></script>
-</body>
+      #loading-bar-container {
+        margin-top: 20px;
+        width: 150px;
+        height: 6px;
+        background-color: #eee;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      #loading-bar {
+        width: 0%;
+        height: 100%;
+        background-color: #42a5f5;
+        animation: load-bar 2s infinite ease-in-out;
+      }
+
+      @keyframes load-bar {
+        0% {
+          width: 0%;
+        }
+        50% {
+          width: 100%;
+        }
+        100% {
+          width: 0%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Splash screen with your logo -->
+    <div id="splash-screen">
+      <div style="text-align: center;">
+        <img src="brcc-logo.png" alt="Loading Impact App" />
+        <div id="loading-bar-container">
+          <div id="loading-bar"></div>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Flutter app bootstrap -->
+    <script src="flutter_bootstrap.js" async></script>
+
+    <script>
+      // Wait for Flutter to load, then remove splash
+      window.addEventListener("flutter-first-frame", function () {
+        const splash = document.getElementById("splash-screen");
+        if (splash) splash.remove();
+      });
+    </script>
+  </body>
 </html>
